@@ -60,18 +60,19 @@
                     <a href="#" class="close" data-dismiss="modal">×</a>
                     <h4>用户登录</h4>
                 </div>
-                <div class="modal-body">
-                    <form class="form-signin" role="form">
-                        <input type="email" class="form-control" placeholder="用户名" required autofocus>
-                        <input type="password" class="form-control" placeholder="密码" required>
+                <div class="modal-body" >
+                    <form class="form-signin" role="form" action="index.php/Home/Login">
+                        <input type="email" class="form-control" name="uid" id="uid" placeholder="用户名" required autofocus>
+                        <input type="password" class="form-control" name="psw" placeholder="密码" required>
                         <div class="checkbox">
                             <label>
                                 <input type="checkbox" value="remember-me">记住密码</label>
                         </div>
+                        <button class="btn btn-lg btn-primary" type="submit">登录</button>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-lg btn-primary" type="submit">登录</button>
+
                 </div>
             </div>
         </div>
