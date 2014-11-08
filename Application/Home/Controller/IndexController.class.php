@@ -5,12 +5,13 @@ use Think\Model;
 
 class IndexController extends Controller {
     public function index(){
-//        $User=new Model('User');
-//        $data=$User->select();
-//        dump($data);
+        $User=new Model('question');
+        $data=$User->select();
+//        dump($data[0]['title']);
+        $this->assign('problemData',$data);
     	$this->display('index');
     }
-    public function hello(){
+    public function login(){
         echo "xxx";
     }
 }

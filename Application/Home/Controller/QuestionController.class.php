@@ -9,13 +9,13 @@
 namespace Home\Controller;
 use Think\Controller;
 
-class LoginController extends Controller{
+class QuestionController extends Controller{
     public function index(){
         echo $_GET['uid'];
         echo $_POST['psw'];
         echo "just test";
     }
-    public function hello(){
+    public function detail(){
         echo "xxx";
     }
 } 

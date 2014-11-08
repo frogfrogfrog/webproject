@@ -1,0 +1,24 @@
+[ 2014-11-05T15:47:03+08:00 ] 127.0.0.1 /webproject/index.php
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.096005s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.030001s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.032001s ]
+NOTIC: [8] Use of undefined constant _PUBLIC_ - assumed '_PUBLIC_' D:\wamp\www\webproject\Application\Home\Controller\IndexController.class.php 第 11 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.021001s ]
+INFO: [ app_end ] --END-- [ RunTime:0.022001s ]
+
+[ 2014-11-05T15:57:53+08:00 ] 127.0.0.1 /webproject/index.php
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [8] Use of undefined constant _PUBLIC_ - assumed '_PUBLIC_' D:\wamp\www\webproject\Application\Home\Controller\IndexController.class.php 第 11 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002000s ]
+

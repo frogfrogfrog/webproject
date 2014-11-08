@@ -2,14 +2,14 @@
 /**
  * Created by PhpStorm.
  * User: Administrator
- * Date: 2014/11/2
- * Time: 19:47
+ * Date: 2014/11/8
+ * Time: 15:53
  */
 
 namespace Home\Model;
 use Think\Model;
 
-class UserModel extends  Model{
-    protected $tablePrefix='';
 
+class QuestionModel extends  Model{
+    protected $tablePrefix='';
 } 
