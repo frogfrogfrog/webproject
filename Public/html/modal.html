@@ -1,0 +1,136 @@
+<div class="modal fade">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal">×</a>
+                <h4>用户登录</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-signin" role="form" method="post" id="login">
+                    <div class="control-group">
+                        <label class="control-label" for="loginUid">用户名:</label>
+
+                        <div class="controls">
+                            <input type="text" class="form-control" name="loginUid" id="loginUid" placeholder="yzx12"
+                                   required autofocus>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="loginPsw">密码:</label>
+
+                        <div class="controls">
+                            <input type="password" id="loginPsw" class="form-control" name="psw" placeholder="********"
+                                   required>
+                        </div>
+                    </div>
+
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="remember-me">记住密码</label>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label" id="loginError" style="color: red"></label>
+                    </div>
+                    <button class="btn btn-lg btn-primary" type="submit">登录</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="signupModal">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal">×</a>
+                <h4>用户注册</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="signup">
+                    <!-- Sign Up Form -->
+                    <!-- Text input-->
+                    <div class="control-group">
+                        <label class="control-label" for="signupUid">用户名:</label>
+
+                        <div class="controls">
+                            <input id="signupUid" class="form-control" type="text"
+                                   placeholder="a_123" class="input-large" required="true"
+                                   pattern="^[A-Za-z\d_]{3,12}$"
+                                   title="3~12字符，允许数字、字母、下划线">
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="control-group">
+                        <label class="control-label" for="signupNickname">昵称:</label>
+
+                        <div class="controls">
+                            <input id="signupNickname" class="form-control" type="text"
+                                   placeholder="JoeSixpack"
+                                   class="input-large" required="true">
+                        </div>
+                    </div>
+
+                    <!-- Password input-->
+                    <div class="control-group">
+                        <label class="control-label" for="signupPsw1">密码:</label>
+
+                        <div class="controls">
+                            <input id="signupPsw1" class="form-control" type="password"
+                                   placeholder="********" class="input-large" required="true"
+                                   onchange="checkPasswords()">
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="control-group">
+                        <label class="control-label" for="signupPsw2">确认密码:</label>
+
+
+                        <div class="controls">
+                            <input id="signupPsw2" class="form-control" type="password"
+                                   placeholder="********" class="input-large" required="true"
+                                   onchange="checkPasswords()">
+                        </div>
+
+
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" id="signupError" style="color: red"></label>
+                    </div>
+
+                    <!-- Multiple Radios (inline) -->
+                    <!-- Button -->
+                    <div class="control-group">
+                        <label class="control-label" for="signupConfirm"></label>
+
+                        <div class="controls">
+                            <button id="signupConfirm" class="btn btn-success">注册</button>
+                        </div>
+                    </div>
+
+                </form>
+                <script>
+                    function checkPasswords() {
+                        var pass1 = document.getElementById("signupPsw1");
+                        var pass2 = document.getElementById("signupPsw2");
+                        if (pass1.value != pass2.value)
+                            pass1.setCustomValidity("两次密码必须输入一致！");
+                        else
+                            pass1.setCustomValidity('');
+                    }
+                </script>
+            </div>
+
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+

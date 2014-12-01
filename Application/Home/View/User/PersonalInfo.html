@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<?php
+    session_start();         //启动session
+?>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>homepage</title>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+
+    <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
+
+    <link rel="Stylesheet" type="text/css" href="__PUBLIC__/css/loginDialog.css"/>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+</head>
+
+<body background="__PUBLIC__/img/background.jpg">
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="__PUBLIC__/js/bootstrap.min.js"></script>
+
+<include file="./Public/html/nav.html"/>
+
+<include file="./Public/html/signupBox.html"/>
+
+<include file="./Public/html/loginBox.html"/>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8 col-md-8">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+
+                <!-- List group -->
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active">
+                                <a href="#questionList" data-toggle="tab">提问</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#commentList" data-toggle="tab">回答</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <div id="myTabContent" class="tab-content">
+                        <div class="tab-pane fade in active" id="questionList">
+                            <foreach name="questionList" item="vo">
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <h4 class="media-heading" style="margin-left: 15px"><a
+                                                href="__ROOT__/index.php/Home/Question/Detail/qid/{$vo.qid}">{$vo.title}</a>
+                                        </h4>
+                                    </div>
+                                    <div class="row"></div>
+                                </li>
+                            </foreach>
+                        </div>
+                        <div class="tab-pane fade" id="commentList">
+                            <foreach name="commentList" item="vo">
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <h4 class="media-heading" style="margin-left: 15px"><a
+                                                href="__ROOT__/index.php/Home/Question/Detail/qid/{$vo.qid}">{$vo.title}</a>
+                                        </h4>
+                                    </div>
+                                    <div class="row">
+                                        <h6 style="margin-left: 40px">
+                                            {$vo.comment}
+                                        </h6>
+                                    </div>
+                                </li>
+                            </foreach>
+                        </div>
+                    </div>
+
+                </ul>
+            </div>
+        </div>
+        <div class="col-sm-3 col-md-3">
+
+
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <!-- List group -->
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-sm-1">
+                                <img class="media-object" src="__PUBLIC__/img/head.png"
+                                     style="height: 50px;width: 50px">
+                            </div>
+                            <div class="col-sm-8 col-sm-offset-1">
+                                <h4>{$userInfo.nickname}</h4>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row">
+                            <p>&nbsp;&nbsp;&nbsp;
+                                <span class="glyphicon glyphicon-star">积分：{$userInfo.credit} &nbsp;</span>
+                                <!--<span class="glyphicon glyphicon-thumbs-up">赞同：20</span>-->
+                            </p>
+
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="panel panel-default">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <p class="text-nowrap">
+                            <small>统计信息</small>
+                        </p>
+                    </li>
+                    <li class="list-group-item">
+                        <ul>
+                            <li>问题数：{$questionNum}</li>
+                            <li>评论数：100</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<include file="./Public/html/footer.html"/>
+
+<script type="text/javascript">
+    var root = "__ROOT__";
+</script>
+
+<script type="text/javascript" src="__PUBLIC__/js/default.js"></script>
+</body>
+
+</html>

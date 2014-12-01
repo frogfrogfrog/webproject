@@ -15,6 +15,7 @@ class LoginController extends Controller
 {
     public function index()
     {
+        echo "a";
 
 
     }
@@ -40,7 +41,7 @@ class LoginController extends Controller
 
         if($vo['uidCheck']==1 && $vo['uidCheck']==1){
             session('name',$vo['nickname']);
-            session('uid',$vo['uidCheck']);
+            session('uid',$vo['uid']);
             session('expire',30*24*60*60);
         }
 //        dump($vo);
@@ -75,6 +76,12 @@ class LoginController extends Controller
         else {
 
         }
+        $this->ajaxReturn($vo,"json");
+    }
+
+    public function logout(){
+        session(null);
+        $vo=1;
         $this->ajaxReturn($vo,"json");
     }
 

@@ -1,5 +1,7 @@
 <?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
 <html lang="zh-cn">
+<?php
+ session_start(); ?>
 
 <head>
     <meta charset="utf-8">
@@ -18,9 +20,30 @@
     <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <link rel="Stylesheet" type="text/css" href="/webproject/Public/css/loginDialog.css"/>
+
+    <script type="text/javascript" src="/webproject/Public/js/jquery-2.0.2.js"></script>
+    <script type="text/javascript" src="/webproject/Public/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" src="/webproject/Public/ueditor/ueditor.all.min.js"></script>
+    <script>
+        $(function(){
+            var ue = UE.getEditor('container',{
+                serverUrl :"/webproject/index.php/Home/Question/ueditor"
+            });
+        })
+    </script>
+
+
+
 </head>
 
-<body background="d.jpg">
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<!--<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>-->
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/webproject/Public/js/bootstrap.min.js"></script>
+<!--<script type="text/javascript" src="/webproject/Public/js/default.js"></script>-->
+
+<body background="/webproject/Public/img/background.jpg">
 
 <nav role="navigation">
     <div class="navbar navbar-inverse">
@@ -29,75 +52,86 @@
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
                             aria-expanded="false" aria-controls="navbar"></button>
-                    <a class="navbar-brand" href="#">My Quara</a>
+                    <a class="navbar-brand" href="/webproject/index.php">My Quara</a>
                 </div>
-                <form class="navbar-form navbar-left" role="search">
+                <form class="navbar-form navbar-left" id="search" method="get" action="" role="search">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="搜索问题">
+                        <input type="text" class="form-control" id="searchText" placeholder="搜索问题">
                     </div>
-                    <button type="submit" class="btn btn-success">提问</button>
                 </form>
+                <button class="btn btn-success" id="question" style="margin-top: 7px">提问</button>
 
-                <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav navbar-right" >
+
+                    <!--<li class="dropdown">-->
+                        <!--<a class="dropdown-toggle" data-toggle="dropdown"  id="navUserInfo">-->
+                        <!--<p4 style="color: #d9edf7" id="navNickname" uid=""></p4>-->
+                        <!--<b class="caret" id="caret"></b>-->
+                        <!--<ul class="dropdown-menu">-->
+                            <!--<li><a href="/user/preferences"><i class="icon-cog"></i>个人主页</a></li>-->
+                            <!--<li><a hreir="/auth/logout"><i class="icon-off"></i> 退出登录</a></li>-->
+                        <!--</ul>-->
+                        <!--</a>-->
+                    <!--</li>-->
                     <li>
-                        <a href="#signup" data-toggle="modal" data-target="#signup">注册</a>
+                        <a id="navSignup">注册</a>
+                    </li>
+                    <li>
+                        <a id="navLogin">登录</a>
+                    </li>
+
+                    <li>
+                        <a class="glyphicon glyphicon-user" uid="" id="navUserInfo"></a>
+                    </li>
+
+                    <li>
+                        <a class="glyphicon glyphicon-off" id="navOff">注销</a>
                     </li>
                 </ul>
 
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="#login" data-toggle="modal" data-target="#login">登录</a>
 
-                    </li>
-                </ul>
             </div>
         </nav>
     </div>
 </nav>
-<div class="modal fade" id="login">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <a href="#" class="close" data-dismiss="modal">×</a>
-                <h4>用户登录</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-signin" role="form">
-                    <input type="email" class="form-control" placeholder="用户名" required autofocus>
-                    <input type="password" class="form-control" placeholder="密码" required>
 
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="remember-me">记住密码</label>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-lg btn-primary" type="submit">登录</button>
+<div id="LoginBox">
+    <div class="row1">
+        登录DIY账号窗口<a href="javascript:void(0)" title="关闭窗口" class="close_btn" id="closeLoginBox">×</a>
+    </div>
+    <div class="row"></div>
+    <form id="login" class="form-horizontal" role="form" style="margin-left: 20px;margin-right: 30px;padding-top: 10px">
+        <div class="form-group">
+            <label for="loginUid" class="col-sm-2 control-label">帐号</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="loginUid" placeholder="yzx12" required>
             </div>
         </div>
-    </div>
-</div>
-
-<div class="modal fade" id="signup">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <a href="#" class="close" data-dismiss="modal">×</a>
-                <h4>用户注册</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-signin" role="form">
-                    <input type="email" class="form-control" placeholder="用户名" required autofocus>
-                    <input type="password" class="form-control" placeholder="密码" required>
-                    <input type="password" class="form-control" placeholder="再次输入密码" required>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-lg btn-primary" type="submit">注册</button>
+        <div class="form-group">
+            <label for="loginPsw" class="col-sm-2 control-label">密码</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="loginPsw" placeholder="********" required>
             </div>
         </div>
-    </div>
+        <!--<div class="form-group">-->
+            <!--<div class="col-sm-offset-2 col-sm-10">-->
+                <!--<div class="checkbox">-->
+                    <!--<label>-->
+                        <!--<input type="checkbox"> 记住密码-->
+                    <!--</label>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+
+        <div class="control-group">
+            <label class="control-label" id="loginError" style="color: red"></label>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-success">登录</button>
+            </div>
+        </div>
+    </form>
 </div>
 
 <div class="container">
@@ -108,7 +142,7 @@
                     <li class="list-group-item">
                         <div class="row">
                             <div class="col-sm-1">
-                                <img class="media-object" src="head.png" style="height: 50px;width: 50px">
+                                <img class="media-object" src="/webproject/Public/img/head.png" style="height: 50px;width: 50px">
                             </div>
                             <div class="col-sm-11">
                                 <p>
@@ -117,9 +151,8 @@
                                     <span class="label label-info">编程</span>
                                     <span class="label label-info">算法</span>
                                 </p>
-                                <a href="#detail">
-                                    <h4 class="media-heading" id="title"><?php echo ($questionData["title"]); ?></h4>
-                                </a>
+
+                                <h4 class="media-heading" id="title"><?php echo ($questionData["title"]); ?></h4>
                             </div>
 
                         </div>
@@ -134,11 +167,12 @@
                                 <p>
                                     <span class="glyphicon glyphicon-user"></span>by <a href="#">Bhaumik</a>
                                     <span class="glyphicon glyphicon-calendar"></span><?php echo ($questionData["time"]); ?> |
-                                    <span id="like1" class="glyphicon glyphicon-thumbs-up"></span>
-                                    <span id="like1-count"></span>
+
+                                    <span id="like" qid=<?php echo ($questionData["qid"]); ?> class="glyphicon glyphicon-thumbs-up"></span>
+                                    <span id="like-count"><?php echo ($questionData["supported"]); ?></span>
                                     |
-                                    <span id="dislike1" class="glyphicon glyphicon-thumbs-down"></span>
-                                    <span id="dislike1-count"></span>
+                                    <span id=dislike1 qid=<?php echo ($questionData["qid"]); ?> class="glyphicon glyphicon-thumbs-down"></span>
+                                    <span id="dislike1-count"><?php echo ($questionData["opposed"]); ?></span>
                                 </p>
                             </div>
 
@@ -148,77 +182,52 @@
             </div>
 
             <div class="panel panel-default">
-                <div class="panel-heading">回复数量：2</div>
+                <div class="panel-heading">回复数量:<?php echo ($commentSize); ?></div>
                 <ul class="list-group">
-                    <li class="list-group-item">
-                        <div class="row">
-                            <div class="col-sm-1">
-                                <img class="media-object" src="head.png" style="height: 50px;width: 50px">
+                    <?php if(is_array($commentList)): foreach($commentList as $key=>$vo): ?><li class="list-group-item">
+                            <div class="row">
+                                <div class="col-sm-1">
+                                    <img class="media-object" src="/webproject/Public/img/head.png" style="height: 50px;width: 50px">
+                                </div>
+                                <div class="col-sm-11">
+                                    <?php echo ($vo["comment"]); ?>
+                                </div>
                             </div>
-                            <div class="col-sm-11">
-                                异常处理
-                                是必须处理的一块内容，当发生错误时（用户提交无效的请求、服务器出错等等），我们需要让用户知道什么地方出错了，没有任何错误反馈是很让人无语的。目前主要采用这两种方式来处理异常：
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12 col-sm-offset-1 col-md-offset-1">
+                                    <br>
+
+                                    <p>
+                                        <span class="glyphicon glyphicon-calendar"></span>Sept 16th, 2012 |
+                                        <span class="glyphicon glyphicon-comment"></span> <a href="#">3 Comments</a> |
+
+                                        <span id="like11" class="glyphicon glyphicon-thumbs-up"></span>
+                                        <span id="like1-count1"></span>
+                                        |
+                                        <span id="dislike11" class="glyphicon glyphicon-thumbs-down"></span>
+                                        <span id="dislike1-count1"></span>
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-sm-12 col-md-12 col-sm-offset-1 col-md-offset-1">
-                                <br>
-
-                                <p>
-                                    <span class="glyphicon glyphicon-calendar"></span>Sept 16th, 2012 |
-                                    <span class="glyphicon glyphicon-comment"></span> <a href="#">3 Comments</a> |
-
-                                    <span id="like1" class="glyphicon glyphicon-thumbs-up"></span>
-                                    <span id="like1-count"></span>
-                                    |
-                                    <span id="dislike1" class="glyphicon glyphicon-thumbs-down"></span>
-                                    <span id="dislike1-count"></span>
-                                </p>
-                            </div>
-
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="row">
-                            <div class="col-sm-1">
-                                <img class="media-object" src="head.png" style="height: 50px;width: 50px">
-                            </div>
-                            <div class="col-sm-11">
-                                异常处理
-                                是必须处理的一块内容，当发生错误时（用户提交无效的请求、服务器出错等等），我们需要让用户知道什么地方出错了，没有任何错误反馈是很让人无语的。目前主要采用这两种方式来处理异常：
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-sm-12 col-md-12 col-sm-offset-1 col-md-offset-1">
-                                <br>
-
-                                <p>
-                                    <span class="glyphicon glyphicon-calendar"></span>Sept 16th, 2012 |
-                                    <span class="glyphicon glyphicon-comment"></span> <a href="#">3 Comments</a> |
-
-                                    <span id="like1" class="glyphicon glyphicon-thumbs-up"></span>
-                                    <span id="like1-count"></span>
-                                    |
-                                    <span id="dislike1" class="glyphicon glyphicon-thumbs-down"></span>
-                                    <span id="dislike1-count"></span>
-                                </p>
-                            </div>
-
-                        </div>
-                    </li>
+                        </li><?php endforeach; endif; ?>
                 </ul>
             </div>
 
             <div class="well">
                 <h4><i class="fa fa-paper-plane-o"></i>回复：</h4>
-                <form role="form">
+                <form role="form" id="postComment" action="/webproject/index.php/Home/Question/postComment" method="post" onsubmit="return mySubmit(true)">
                     <div class="form-group">
-                        <textarea class="form-control" rows="3"></textarea>
+                        <script id="container" name="content" type="text/plain">
+                        </script>
                     </div>
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-reply"></i>提交</button>
+                    <input type="hidden" id="comment" name="comment" value="">
+                    <input type="hidden" id="commentQid" name="commentQid" value="">
+                    <input type="hidden" id="commentUid" name="commentUid" value="">
+                    <input type="hidden" id="commentTitle" name="commentTitle" value="">
+                    <button  type="submit" class="btn btn-primary"><i class="fa fa-reply"></i>提交</button>
                 </form>
+                <h4 id="commentError" style="color: #ff0000"></h4>
+
             </div>
 
         </div>
@@ -255,91 +264,94 @@
         </div>
     </div>
 </div>
+
 <footer role="contentinfo" class="page-footer">
     <hr>
     <p>
         Copyright &copy; 2014 - Balazs Kutil -
             <span class="credit">
                 Powered by
-                <a href="http://octopress.org">Octopress</a>
+                <a href="http://octopress.org">yzx12</a>
             </span>
     </p>
 
 </footer>
 
+
+<script type="text/javascript" src="/webproject/Public/js/default.js"></script>
+
+
 <script type="text/javascript">
+    var root="/webproject";
+
     $(document).ready(function () {
-        $('span.glyphicon-thumbs-up, span.glyphicon-thumbs-down').click(function () {
-            var $this = $(this),
-                    c = $this.data('count');
-            if (!c) c = 0;
-            c++;
-            $this.data('count', c);
-            $('#' + this.id + '-count').html(c);
+        function mySubmit(flag){
+            return flag;
+        }
+        $("#postComment").submit(function(){
+            var comment=UE.getEditor('container').getContent();
+            if(comment!=""){
+                var title=$("#title").html();
+                var uid=$("#navUserInfo").attr("uid");
+                var qid=$("#like").attr("qid");
+                $("#commentUid").val(uid);
+                $("#commentTitle").val(title);
+                $("#commentQid").val(qid);
+                $("#comment").val(comment);
+                return mySubmit(true);
+            }else{
+                $("#commentError").html("回复内容不能为空");
+                return mySubmit(false);
+            }
         });
-        $(document).delegate('*[data-toggle="lightbox"]', 'click', function (event) {
-            event.preventDefault();
-            $(this).ekkoLightbox();
+
+
+
+        $("#navSignup").bind("click",function(){
+            $('#loginModal').modal('show');
         });
+        //点赞功能
+
+        $(".glyphicon-thumbs-up").bind("click", function () {
+            var mythis = $(this);
+            $.ajax({
+                type: 'POST',
+                url: "/webproject/index.php/Home/Question/like",
+                data: {qid: $(this).attr('qid')},
+                dataType: 'json',
+                success: function (data) {
+                    mythis.next().html(data['supported']);
+                },
+                error: function () {
+                    alert("出现错误了");
+                }
+            })
+        });
+
+        $(".glyphicon-thumbs-down").bind("click", function () {
+            var mythis = $(this);
+            $.ajax({
+                type: 'POST',
+                url: "/webproject/index.php/Home/Question/dislike",
+                data: {qid: $(this).attr('qid')},
+                dataType: 'json',
+                success: function (data) {
+                    mythis.next().html(data['opposed']);
+                },
+                error: function () {
+                    alert("出现错误了");
+                }
+            })
+        });
+
     });
 </script>
 
-<script type="text/javascript">
-    var disqus_shortname = 'bootstrapthemedemo';
 
-
-    var disqus_script = 'count.js';
-
-    (function () {
-        var dsq = document.createElement('script');
-        dsq.type = 'text/javascript';
-        dsq.async = true;
-        dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
-</script>
-
-<div id="fb-root"></div>
-<script>
-    (function (d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) {
-            return;
-        }
-        js = d.createElement(s);
-        js.id = id;
-        js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-</script>
-
-<script type="text/javascript">
-    (function () {
-        var script = document.createElement('script');
-        script.type = 'text/javascript';
-        script.async = true;
-        script.src = 'https://apis.google.com/js/plusone.js';
-        var s = document.getElementsByTagName('script')[0];
-        s.parentNode.insertBefore(script, s);
-    })();
-</script>
-
-<script type="text/javascript">
-    (function () {
-        var twitterWidgets = document.createElement('script');
-        twitterWidgets.type = 'text/javascript';
-        twitterWidgets.async = true;
-        twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
-        document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-</script>
-
-
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="js/bootstrap.min.js"></script>
 
 </body>
+
+
+
 
 </html>
