@@ -40,6 +40,7 @@ $(document).ready(function () {
                 $("#navOff").hide();
                 $("#navLogin").show();
                 $("#navSignup").show();
+                refresh();
             },
             error: function () {
                 alert("出现错误了");
@@ -63,9 +64,11 @@ $(document).ready(function () {
                 $("#navOff").show();
                 $("#navLogin").hide();
                 $("#navSignup").hide();
+
             } else {
                 $("#navUserInfo").hide();
                 $("#navOff").hide();
+
             }
         },
         error: function () {
@@ -84,7 +87,7 @@ $(document).ready(function () {
     $("#search").keyup(function (event) {
         var q = $("#searchText").val();
         if (q === "") {
-            alert("请输入搜索内容");
+            event.preventDefault();
         } else {
             if (event.keyCode == 13) {
                 var action = root + "/index.php/Home/Search/index/q/";
@@ -115,7 +118,6 @@ $(document).ready(function () {
                 if (data['status'] == 0) {
                     $("#signupError").html("用户名已经被占用");
                 } else {
-                    $("#signupModal").modal('hide');
                     $("#navNickname").html(name);
                     $("#navNickname").attr("uid", uid);
                     $("#navLogin").hide();
@@ -151,6 +153,7 @@ $(document).ready(function () {
                     $("#navOff").show();
                     $("#navLogin").hide();
                     $("#navSignup").hide();
+                    refresh();
                     cookie('uid', data['uid'], 30 * 24 * 60 * 60);
                     cookie('name', data['nickname'], 30 * 24 * 60 * 60);
                 } else {
@@ -165,6 +168,14 @@ $(document).ready(function () {
 
 
     });
+
+    //判断当前是否是问题详细信息界面，如果是，要刷新界面
+    function refresh(){
+        var reg=/Home\/Question\/Detail/i;
+        if(location.href.match(reg)){
+            location.reload();
+        }
+    }
 
 
     //提问功能

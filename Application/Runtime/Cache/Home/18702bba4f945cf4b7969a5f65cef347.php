@@ -133,6 +133,69 @@
         </div>
     </form>
 </div>
+<div id="SignUpBox">
+    <div class="row1">
+        注册DIY账号窗口<a href="javascript:void(0)" title="关闭窗口" class="close_btn" id="closeSignupBox">×</a>
+    </div>
+    <div class="row"></div>
+    <form id="signup" class="form-horizontal" role="form" style="margin-left: 20px;margin-right: 30px;padding-top: 10px">
+        <div class="form-group">
+            <label for="signupUid" class="col-sm-2 control-label">帐号</label>
+            <div class="col-sm-10">
+                <input id="signupUid" class="form-control" type="text"
+                       placeholder="a_123" class="input-large" required="true"
+                       pattern="^[A-Za-z\d_]{3,12}$"
+                       title="3~12字符，允许数字、字母、下划线">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="signupNickname" class="col-sm-2 control-label">昵称</label>
+            <div class="col-sm-10">
+                <input id="signupNickname" class="form-control" type="text"
+                       placeholder="JoeSixpack"
+                       class="input-large" required="true">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="signupPsw1" class="col-sm-2 control-label">密码</label>
+            <div class="col-sm-10">
+                <div class="controls">
+                    <input id="signupPsw1" class="form-control" type="password"
+                           placeholder="********" class="input-large" required="true"
+                           onchange="checkPasswords()">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="signupPsw2" class="col-sm-2 control-label">密码</label>
+            <div class="col-sm-10">
+                <div class="controls">
+                    <input id="signupPsw2" class="form-control" type="password"
+                           placeholder="********" class="input-large" required="true"
+                           onchange="checkPasswords()">
+                </div>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" id="signupError" style="color: red"></label>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-success">注册</button>
+            </div>
+        </div>
+        <script>
+            function checkPasswords() {
+                var pass1 = document.getElementById("signupPsw1");
+                var pass2 = document.getElementById("signupPsw2");
+                if (pass1.value != pass2.value)
+                    pass1.setCustomValidity("两次密码必须输入一致！");
+                else
+                    pass1.setCustomValidity('');
+            }
+        </script>
+    </form>
+</div>
 
 <div class="container">
     <div class="row">

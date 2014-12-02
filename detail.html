@@ -139,7 +139,7 @@
                                 <p>
                                     <span class="glyphicon glyphicon-user"></span>by <a href="#">Bhaumik</a>
                                     <span class="glyphicon glyphicon-calendar"></span>Sept 16th, 2012 |
-                                    <span id="like1" class="glyphicon glyphicon-thumbs-up"></span>
+                                    <span id="like1" style="color: #ff0000" class="glyphicon glyphicon-thumbs-up"></span>
                                     <span id="like1-count"></span>
                                     |
                                     <span id="dislike1" class="glyphicon glyphicon-thumbs-down"></span>
@@ -189,9 +189,12 @@
                             <div class="col-sm-1">
                                 <img class="media-object" src="head.png" style="height: 50px;width: 50px">
                             </div>
-                            <div class="col-sm-11">
+                            <div class="col-sm-10">
                                 异常处理
                                 是必须处理的一块内容，当发生错误时（用户提交无效的请求、服务器出错等等），我们需要让用户知道什么地方出错了，没有任何错误反馈是很让人无语的。目前主要采用这两种方式来处理异常：
+                            </div>
+                            <div class="col-sm-1">
+                                <span style="color: green;font-size: 30px" class="glyphicon glyphicon-ok"><br></span>
                             </div>
                         </div>
 
@@ -208,6 +211,7 @@
                                     |
                                     <span id="dislike1" class="glyphicon glyphicon-thumbs-down"></span>
                                     <span id="dislike1-count"></span>
+                                    <a href="">采纳</a>
                                 </p>
                             </div>
 
@@ -271,74 +275,6 @@
     </p>
 
 </footer>
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('span.glyphicon-thumbs-up, span.glyphicon-thumbs-down').click(function () {
-            var $this = $(this),
-                    c = $this.data('count');
-            if (!c) c = 0;
-            c++;
-            $this.data('count', c);
-            $('#' + this.id + '-count').html(c);
-        });
-        $(document).delegate('*[data-toggle="lightbox"]', 'click', function (event) {
-            event.preventDefault();
-            $(this).ekkoLightbox();
-        });
-    });
-</script>
-
-<script type="text/javascript">
-    var disqus_shortname = 'bootstrapthemedemo';
-
-
-    var disqus_script = 'count.js';
-
-    (function () {
-        var dsq = document.createElement('script');
-        dsq.type = 'text/javascript';
-        dsq.async = true;
-        dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
-</script>
-
-<div id="fb-root"></div>
-<script>
-    (function (d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) {
-            return;
-        }
-        js = d.createElement(s);
-        js.id = id;
-        js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-</script>
-
-<script type="text/javascript">
-    (function () {
-        var script = document.createElement('script');
-        script.type = 'text/javascript';
-        script.async = true;
-        script.src = 'https://apis.google.com/js/plusone.js';
-        var s = document.getElementsByTagName('script')[0];
-        s.parentNode.insertBefore(script, s);
-    })();
-</script>
-
-<script type="text/javascript">
-    (function () {
-        var twitterWidgets = document.createElement('script');
-        twitterWidgets.type = 'text/javascript';
-        twitterWidgets.async = true;
-        twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
-        document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-</script>
-
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>

@@ -210,10 +210,7 @@
                                 </div>
                                 <div class="col-sm-11">
                                     <p>
-                                        <span class="label label-info">java</span>
-                                        <span class="label label-info">python</span>
-                                        <span class="label label-info">编程</span>
-                                        <span class="label label-info">算法</span>
+                                        <?php if(is_array($vo['tagList'])): foreach($vo['tagList'] as $key=>$tag): ?><span class="label label-info" style="margin-right: 5px"><?php echo ($tag); ?></span><?php endforeach; endif; ?>
                                     </p>
                                     <a href="/webproject/index.php/Home/Question/Detail/qid/<?php echo ($vo["qid"]); ?>">
                                         <h4 class="media-heading"><?php echo ($vo["title"]); ?></h4>
@@ -224,16 +221,18 @@
                                         <br>
 
                                         <p>
-                                            <span class="glyphicon glyphicon-calendar"></span>Sept 16th, 2012 |
+                                            <span class="glyphicon glyphicon-calendar"></span><?php echo ($vo["time"]); ?> |
                                             <span class="glyphicon glyphicon-comment"></span> <a href="#">3 Comments</a>
                                             |
 
-                                            <span id="like1" qid=<?php echo ($vo["qid"]); ?> class="glyphicon glyphicon-thumbs-up"></span>
-                                            <span id="like1-count"><?php echo ($vo["supported"]); ?></span>
-                                            |
-                                            <span id=dislike1 qid=<?php echo ($vo["qid"]); ?>
-                                                  class="glyphicon glyphicon-thumbs-down"></span>
-                                            <span id="dislike1-count"><?php echo ($vo["opposed"]); ?></span>
+                                            <?php if($vo["supported"] > 0): ?><span style="color: #ff0000" qid=<?php echo ($vo["qid"]); ?> class="glyphicon glyphicon-thumbs-up questionPraise"></span>
+                                                <?php else: ?>
+                                                <span qid=<?php echo ($vo["qid"]); ?> class="glyphicon glyphicon-thumbs-up questionPraise"></span><?php endif; ?>
+                                            <span>赞(<?php echo ($vo["supported"]); ?>)</span>
+                                            <!--|-->
+                                            <!--<span id=dislike1 qid=<?php echo ($vo["qid"]); ?>-->
+                                                  <!--class="glyphicon glyphicon-thumbs-down"></span>-->
+                                            <!--<span id="dislike1-count"><?php echo ($vo["opposed"]); ?></span>-->
                                         </p>
                                     </div>
 
@@ -292,46 +291,12 @@
 
 <script type="text/javascript">
     var root="/webproject";
-    $(document).ready(function () {
-        //点赞功能
-        $(".glyphicon-thumbs-up").bind("click", function () {
-            var mythis = $(this);
-            $.ajax({
-                type: 'POST',
-                url: "index.php/Home/Question/like",
-                data: {qid: $(this).attr('qid')},
-                dataType: 'json',
-                success: function (data) {
-                    mythis.next().html(data['supported']);
-                },
-                error: function () {
-                    alert("出现错误了");
-                }
-            })
-        });
-
-        $(".glyphicon-thumbs-down").bind("click", function () {
-            var mythis = $(this);
-            $.ajax({
-                type: 'POST',
-                url: "index.php/Home/Question/dislike",
-                data: {qid: $(this).attr('qid')},
-                dataType: 'json',
-                success: function (data) {
-                    mythis.next().html(data['opposed']);
-                },
-                error: function () {
-                    alert("出现错误了");
-                }
-            })
-        });
-
-    });
 </script>
 
 
 
 <script type="text/javascript" src="/webproject/Public/js/default.js"></script>
+<script type="text/javascript" src="/webproject/Public/js/questionPraise.js"></script>
 </body>
 
 </html>

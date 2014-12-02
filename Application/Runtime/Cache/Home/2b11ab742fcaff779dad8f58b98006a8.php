@@ -272,7 +272,7 @@
                     <li class="list-group-item">
                         <ul>
                             <li>问题数：<?php echo ($questionNum); ?></li>
-                            <li>评论数：100</li>
+                            <li>评论数：<?php echo ($commentNum); ?></li>
                         </ul>
                     </li>
                 </ul>

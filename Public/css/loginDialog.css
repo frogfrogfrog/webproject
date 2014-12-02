@@ -42,6 +42,10 @@
     display: none;
 }
 
+.glyphicon-thumbs-up-red:before {
+    content: "\e125"
+}
+
 
 .close_btn {
     font-family: arial;

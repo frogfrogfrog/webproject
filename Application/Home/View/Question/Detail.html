@@ -49,6 +49,8 @@
 <include file="./Public/html/nav.html" />
 
 <include file="./Public/html/loginBox.html" />
+<include file="./Public/html/signupBox.html" />
+<include file="./Public/html/confirmBox.html" />
 
 <div class="container">
     <div class="row">
@@ -62,10 +64,9 @@
                             </div>
                             <div class="col-sm-11">
                                 <p>
-                                    <span class="label label-info">java</span>
-                                    <span class="label label-info">python</span>
-                                    <span class="label label-info">编程</span>
-                                    <span class="label label-info">算法</span>
+                                    <foreach name="questionData['tagList']"  item="tag">
+                                        <span class="label label-info" style="margin-right: 5px">{$tag}</span>
+                                    </foreach>
                                 </p>
 
                                 <h4 class="media-heading" id="title">{$questionData.title}</h4>
@@ -81,14 +82,20 @@
                                 <br>
 
                                 <p>
-                                    <span class="glyphicon glyphicon-user"></span>by <a href="#">Bhaumik</a>
+                                    <span class="glyphicon glyphicon-user">
+                                    </span>
+                                    by
+                                    <a href="__ROOT__/index.php/Home/User/info/uid/{$questionData.uid}">
+                                        {$questionData.nickname}</a>
                                     <span class="glyphicon glyphicon-calendar"></span>{$questionData.time} |
 
-                                    <span id="like" qid={$questionData.qid} class="glyphicon glyphicon-thumbs-up"></span>
-                                    <span id="like-count">{$questionData.supported}</span>
-                                    |
-                                    <span id=dislike1 qid={$questionData.qid} class="glyphicon glyphicon-thumbs-down"></span>
-                                    <span id="dislike1-count">{$questionData.opposed}</span>
+                                    <if condition="$questionData.supported gt 0">
+                                        <span style="color: #ff0000" hasBest={$questionData.hasBest} uid={$questionData.uid} qid={$questionData.qid} class="glyphicon glyphicon-thumbs-up questionPraise"></span>
+                                        <else />
+                                        <span hasBest={$questionData.hasBest} uid={$questionData.uid} qid={$questionData.qid} class="glyphicon glyphicon-thumbs-up questionPraise"></span>
+                                    </if>
+                                        <span >赞({$questionData.supported})</span>
+
                                 </p>
                             </div>
 
@@ -110,21 +117,34 @@
                                     {$vo.comment}
                                 </div>
                             </div>
+                            <br>
+                            <hr>
                             <div class="row">
-                                <div class="col-sm-12 col-md-12 col-sm-offset-1 col-md-offset-1">
-                                    <br>
-
+                                <div class="col-sm-9 col-md-9 col-sm-offset-1">
                                     <p>
-                                        <span class="glyphicon glyphicon-calendar"></span>Sept 16th, 2012 |
-                                        <span class="glyphicon glyphicon-comment"></span> <a href="#">3 Comments</a> |
+                                        <span class="glyphicon glyphicon-user">
+                                        </span>
+                                        by
+                                        <a href="__ROOT__/index.php/Home/User/info/uid/{$vo.uid}">
+                                            {$vo.nickname}</a>
 
-                                        <span id="like11" class="glyphicon glyphicon-thumbs-up"></span>
-                                        <span id="like1-count1"></span>
-                                        |
-                                        <span id="dislike11" class="glyphicon glyphicon-thumbs-down"></span>
-                                        <span id="dislike1-count1"></span>
+                                        <span class="glyphicon glyphicon-calendar"></span>{$vo.time} |
+                                        <!--<span class="glyphicon glyphicon-comment"></span> <a href="#">3 Comments</a> |-->
+                                        <if condition="$vo.supported gt 0">
+                                            <span style="color: #ff0000" cid={$vo.cid} class="glyphicon glyphicon-thumbs-up commentPraise"></span>
+                                            <else />
+                                            <span  cid={$vo.cid} style="" class="glyphicon glyphicon-thumbs-up commentPraise"></span>
+                                        </if>
+
+                                        <span  cid={$vo.cid}>赞({$vo.supported})</span>|
+                                        <a style="display: none" class="bestCommentOption" cid={$vo.cid}>采纳</a>
                                     </p>
                                 </div>
+                                <if condition="($vo.isBest eq '1')">
+                                    <div class="col-sm-2 col-md-2" class="bestAsw" isBest="">
+                                        <p>被采纳<span style="color: green;font-size: 25px" class="glyphicon glyphicon-ok"><br></span></p>
+                                    </div>
+                                </if>
                             </div>
                         </li>
                     </foreach>
@@ -186,13 +206,47 @@
 <include file="./Public/html/footer.html" />
 
 
+
 <script type="text/javascript" src="__PUBLIC__/js/default.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/detail.js"></script>
+
+<script type="text/javascript" src="__PUBLIC__/js/questionPraise.js"></script>
 
 
 <script type="text/javascript">
     var root="__ROOT__";
 
     $(document).ready(function () {
+
+        $(".commentPraise").bind("click", function () {
+            var mythis = $(this);
+            var uid=$("#navUserInfo").attr("uid");
+            if(uid==""){
+                $("#LoginBox").fadeIn("slow");
+            }else{
+                $.ajax({
+                    type: 'POST',
+                    url: root+"/index.php/Home/Question/commentPraise",
+                    data: {cid: $(this).attr('cid'),uid:uid},
+                    dataType: 'json',
+                    success: function (data) {
+                        if(data['supported']==0){
+                            mythis.css("color","");
+                            mythis.next().html("赞("+data['supported']+")");
+                        }else{
+                            mythis.css("color","red");
+                            mythis.next().html("赞("+data['supported']+")");
+                        }
+                    },
+                    error: function () {
+                        alert("出现错误了");
+                    }
+                });
+            }
+
+        });
+
+
         function mySubmit(flag){
             return flag;
         }
@@ -201,7 +255,7 @@
             if(comment!=""){
                 var title=$("#title").html();
                 var uid=$("#navUserInfo").attr("uid");
-                var qid=$("#like").attr("qid");
+                var qid=$(".questionPraise").attr("qid");
                 $("#commentUid").val(uid);
                 $("#commentTitle").val(title);
                 $("#commentQid").val(qid);
@@ -214,43 +268,6 @@
         });
 
 
-
-        $("#navSignup").bind("click",function(){
-            $('#loginModal').modal('show');
-        });
-        //点赞功能
-
-        $(".glyphicon-thumbs-up").bind("click", function () {
-            var mythis = $(this);
-            $.ajax({
-                type: 'POST',
-                url: "__ROOT__/index.php/Home/Question/like",
-                data: {qid: $(this).attr('qid')},
-                dataType: 'json',
-                success: function (data) {
-                    mythis.next().html(data['supported']);
-                },
-                error: function () {
-                    alert("出现错误了");
-                }
-            })
-        });
-
-        $(".glyphicon-thumbs-down").bind("click", function () {
-            var mythis = $(this);
-            $.ajax({
-                type: 'POST',
-                url: "__ROOT__/index.php/Home/Question/dislike",
-                data: {qid: $(this).attr('qid')},
-                dataType: 'json',
-                success: function (data) {
-                    mythis.next().html(data['opposed']);
-                },
-                error: function () {
-                    alert("出现错误了");
-                }
-            })
-        });
 
     });
 </script>
