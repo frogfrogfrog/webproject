@@ -10,26 +10,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>homepage</title>
     <!-- 新 Bootstrap 核心 CSS 文件 -->
-    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/css/bootstrap.min.css">
 
     <!-- 可选的Bootstrap主题文件（一般不用引入） -->
-    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/css/bootstrap-theme.min.css">
 
     <link rel="Stylesheet" type="text/css" href="__PUBLIC__/css/loginDialog.css"/>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <!--<script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>-->
+    <!--<script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>-->
+    <!--<![endif]&ndash;&gt;-->
 
 
 </head>
 
 <body background="__PUBLIC__/img/background.jpg">
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+<js href="__PUBLIC__/js/jquery-2.0.2.js" />
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="__PUBLIC__/js/bootstrap.min.js"></script>
 
@@ -44,18 +44,40 @@
         <div class="col-sm-8 col-md-8">
             <div class="panel panel-default">
                 <!-- Default panel contents -->
-                <div class="panel-heading">
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="active"><a href="#">最新</a>
-                        </li>
-                        <li role="presentation"><a href="#">热门</a>
-                        </li>
-                        <li role="presentation"><a href="#">推荐</a>
-                        </li>
-                    </ul>
-                </div>
                 <!-- List group -->
                 <ul class="list-group">
+                    <div class="list-group-item">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <if condition="$questionType eq 0">
+                                <li role="presentation" class="active">
+                                    <a class="tabNameList" href="__ROOT__/index.php/Home/Index/index/type/newest">最新</a>
+                                </li>
+                                <else />
+                                <li role="presentation">
+                                    <a class="tabNameList" href="__ROOT__/index.php/Home/Index/index/type/newest">最新</a>
+                                </li>
+                            </if>
+
+                            <if condition="$questionType eq 1">
+                                <li role="presentation" class="active">
+                                    <a class="tabNameList" href="__ROOT__/index.php/Home/Index/index/type/hottest">热门</a>
+                                </li>
+                                <else />
+                                <li role="presentation">
+                                    <a class="tabNameList" href="__ROOT__/index.php/Home/Index/index/type/hottest">热门</a>
+                                </li>
+                            </if>
+                            <if condition="$questionType eq 2">
+                                <li role="presentation" class="active">
+                                    <a class="tabNameList" href="__ROOT__/index.php/Home/Index/index/type/unsolved">待解决</a>
+                                </li>
+                                <else />
+                                <li role="presentation">
+                                    <a class="tabNameList" href="__ROOT__/index.php/Home/Index/index/type/unsolved">待解决</a>
+                                </li>
+                            </if>
+                        </ul>
+                    </div>
                     <foreach name="problemData" item="vo">
                         <li class="list-group-item">
                             <div class="row">
@@ -79,9 +101,8 @@
 
                                         <p>
                                             <span class="glyphicon glyphicon-calendar"></span>{$vo.time} |
-                                            <span class="glyphicon glyphicon-comment"></span> <a href="#">3 Comments</a>
+                                            <span class="glyphicon glyphicon-comment"></span> <a href="__ROOT__/index.php/Home/Question/Detail/qid/{$vo.qid}#postComment">回答</a>
                                             |
-
                                             <if condition="$vo.supported gt 0">
                                                 <span style="color: #ff0000" qid={$vo.qid} class="glyphicon glyphicon-thumbs-up questionPraise"></span>
                                                 <else />
@@ -111,11 +132,11 @@
                 </div>
                 <!-- List group -->
                 <ul class="list-group">
-                    <li class="list-group-item">java</li>
-                    <li class="list-group-item">C++</li>
-                    <li class="list-group-item">Python</li>
-                    <li class="list-group-item">PHP</li>
-                    <li class="list-group-item">HTML5</li>
+                    <foreach name="hottestTopic" item="vo">
+                        <li class="list-group-item">
+                            <a href="#">{$vo.tagname} <span class="badge">{$vo['count(qid)']}</span></a>
+                        </li>
+                    </foreach>
                 </ul>
             </div>
 
@@ -126,11 +147,13 @@
 
                 <!-- List group -->
                 <ul class="list-group">
-                    <li class="list-group-item">Cras justo odio</li>
-                    <li class="list-group-item">Dapibus ac facilisis in</li>
-                    <li class="list-group-item">Morbi leo risus</li>
-                    <li class="list-group-item">Porta ac consectetur ac</li>
-                    <li class="list-group-item">Vestibulum at eros</li>
+                    <foreach name="hottestUser" item="vo">
+
+                        <li class="list-group-item">
+                            <p><img class="media-object" src="__PUBLIC__/img/head.png"
+                                    style="height: 50px;width: 50px"><a href="__ROOT__/index.php/Home/User/info/uid/{$vo.uid}">{$vo.nickname}</a> 积分:{$vo.credit}</p>
+                        </li>
+                    </foreach>
                 </ul>
             </div>
         </div>

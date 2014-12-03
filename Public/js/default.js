@@ -176,8 +176,6 @@ $(document).ready(function () {
             location.reload();
         }
     }
-
-
     //提问功能
     $("#question").bind("click", function () {
         $.ajax({
@@ -187,7 +185,24 @@ $(document).ready(function () {
             dataType: 'json',
             success: function (data) {
                 if (data['status'] == 1) {
-                    location.href=root+"/index.php/Home/Question/postQuestion";
+                    var uid=$("#navUserInfo").attr("uid");
+                    $.ajax({
+                        type: 'POST',
+                        url: root + "/index.php/Home/Question/canPostQuestion",
+                        data: {uid:uid},
+                        dataType: 'json',
+                        success: function (data) {
+                            if(data['flag']==0){
+                                $("#warnMessage").html("您的积分为"+data['credit']+",今天提问数量为："+data['num']+",已经达到上限，请明日再来，积分规则如下：");
+                                $("#warnBox").modal('show');
+                            }else{
+                                location.href=root+"/index.php/Home/Question/postQuestion";
+                            }
+                        },
+                        error: function () {
+                            alert("aa");
+                        }
+                    });
 
                 } else {
                     $("#LoginBox").fadeIn("slow");
@@ -198,10 +213,6 @@ $(document).ready(function () {
             }
         })
     });
-
-
-
-
 });
 
 

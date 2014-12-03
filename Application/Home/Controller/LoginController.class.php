@@ -24,11 +24,8 @@ class LoginController extends Controller
     {
         $User = M("User");
         $vo['uid'] = I('uid');
-//        $vo['uid'] = "001";
         $vo['psw']=I('psw');
-//        $vo['psw']="112";
         $list = $User->where("uid=%s",$vo['uid'])->find();
-//        dump($list);
         $vo['nickname']=$list['nickname'];
         $vo['uidCheck']=1;
         $vo['pswCheck']=1;

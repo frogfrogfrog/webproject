@@ -9,18 +9,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>homepage</title>
     <!-- 新 Bootstrap 核心 CSS 文件 -->
-    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/webproject/Public/css/bootstrap.min.css">
 
     <!-- 可选的Bootstrap主题文件（一般不用引入） -->
-    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/webproject/Public/css/bootstrap-theme.min.css">
 
     <link rel="Stylesheet" type="text/css" href="/webproject/Public/css/loginDialog.css"/>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
 
@@ -28,7 +26,7 @@
 
 <body background="/webproject/Public/img/background.jpg">
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript" src="/webproject/Public/js/jquery-2.0.2.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="/webproject/Public/js/bootstrap.min.js"></script>
 
@@ -81,6 +79,51 @@
         </nav>
     </div>
 </nav>
+
+
+<div class="modal fade" id="warnBox" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">提示</h4>
+            </div>
+            <div class="modal-body">
+                <p id="warnMessage"></p>
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>积分</th>
+                        <th>每日问题上限</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><20</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>>=20</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>>=50</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>>=100</td>
+                        <td>5</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div id="SignUpBox">
     <div class="row1">

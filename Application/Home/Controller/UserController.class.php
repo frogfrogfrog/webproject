@@ -33,7 +33,7 @@ class UserController extends Controller{
 
     public function getHottestUser(){
         $User=M('User');
-        $hottestUser=$User->field('uid,nickname,credit')->order('credit desc')->limit(5)->select;
+        $hottestUser=$User->field('uid,nickname,credit')->order('credit desc')->limit(5)->select();
         return $hottestUser;
     }
 } 

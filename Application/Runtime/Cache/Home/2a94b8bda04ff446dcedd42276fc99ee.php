@@ -9,26 +9,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>homepage</title>
     <!-- 新 Bootstrap 核心 CSS 文件 -->
-    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/webproject/Public/css/bootstrap.min.css">
 
     <!-- 可选的Bootstrap主题文件（一般不用引入） -->
-    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/webproject/Public/css/bootstrap-theme.min.css">
 
     <link rel="Stylesheet" type="text/css" href="/webproject/Public/css/loginDialog.css"/>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <!--<script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>-->
+    <!--<script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>-->
+    <!--<![endif]&ndash;&gt;-->
 
 
 </head>
 
 <body background="/webproject/Public/img/background.jpg">
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript" src="/webproject/Public/js/jquery-2.0.2.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="/webproject/Public/js/bootstrap.min.js"></script>
 
@@ -81,6 +81,51 @@
         </nav>
     </div>
 </nav>
+
+
+<div class="modal fade" id="warnBox" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">提示</h4>
+            </div>
+            <div class="modal-body">
+                <p id="warnMessage"></p>
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>积分</th>
+                        <th>每日问题上限</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><20</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>>=20</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>>=50</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>>=100</td>
+                        <td>5</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div id="SignUpBox">
     <div class="row1">
@@ -190,18 +235,34 @@
         <div class="col-sm-8 col-md-8">
             <div class="panel panel-default">
                 <!-- Default panel contents -->
-                <div class="panel-heading">
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="active"><a href="#">最新</a>
-                        </li>
-                        <li role="presentation"><a href="#">热门</a>
-                        </li>
-                        <li role="presentation"><a href="#">推荐</a>
-                        </li>
-                    </ul>
-                </div>
                 <!-- List group -->
                 <ul class="list-group">
+                    <div class="list-group-item">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <?php if($questionType == 0): ?><li role="presentation" class="active">
+                                    <a class="tabNameList" href="/webproject/index.php/Home/Index/index/type/newest">最新</a>
+                                </li>
+                                <?php else: ?>
+                                <li role="presentation">
+                                    <a class="tabNameList" href="/webproject/index.php/Home/Index/index/type/newest">最新</a>
+                                </li><?php endif; ?>
+
+                            <?php if($questionType == 1): ?><li role="presentation" class="active">
+                                    <a class="tabNameList" href="/webproject/index.php/Home/Index/index/type/hottest">热门</a>
+                                </li>
+                                <?php else: ?>
+                                <li role="presentation">
+                                    <a class="tabNameList" href="/webproject/index.php/Home/Index/index/type/hottest">热门</a>
+                                </li><?php endif; ?>
+                            <?php if($questionType == 2): ?><li role="presentation" class="active">
+                                    <a class="tabNameList" href="/webproject/index.php/Home/Index/index/type/unsolved">待解决</a>
+                                </li>
+                                <?php else: ?>
+                                <li role="presentation">
+                                    <a class="tabNameList" href="/webproject/index.php/Home/Index/index/type/unsolved">待解决</a>
+                                </li><?php endif; ?>
+                        </ul>
+                    </div>
                     <?php if(is_array($problemData)): foreach($problemData as $key=>$vo): ?><li class="list-group-item">
                             <div class="row">
                                 <div class="col-sm-1">
@@ -222,9 +283,8 @@
 
                                         <p>
                                             <span class="glyphicon glyphicon-calendar"></span><?php echo ($vo["time"]); ?> |
-                                            <span class="glyphicon glyphicon-comment"></span> <a href="#">3 Comments</a>
+                                            <span class="glyphicon glyphicon-comment"></span> <a href="/webproject/index.php/Home/Question/Detail/qid/<?php echo ($vo["qid"]); ?>#postComment">回答</a>
                                             |
-
                                             <?php if($vo["supported"] > 0): ?><span style="color: #ff0000" qid=<?php echo ($vo["qid"]); ?> class="glyphicon glyphicon-thumbs-up questionPraise"></span>
                                                 <?php else: ?>
                                                 <span qid=<?php echo ($vo["qid"]); ?> class="glyphicon glyphicon-thumbs-up questionPraise"></span><?php endif; ?>
@@ -251,11 +311,9 @@
                 </div>
                 <!-- List group -->
                 <ul class="list-group">
-                    <li class="list-group-item">java</li>
-                    <li class="list-group-item">C++</li>
-                    <li class="list-group-item">Python</li>
-                    <li class="list-group-item">PHP</li>
-                    <li class="list-group-item">HTML5</li>
+                    <?php if(is_array($hottestTopic)): foreach($hottestTopic as $key=>$vo): ?><li class="list-group-item">
+                            <a href="#"><?php echo ($vo["tagname"]); ?> <span class="badge"><?php echo ($vo['count(qid)']); ?></span></a>
+                        </li><?php endforeach; endif; ?>
                 </ul>
             </div>
 
@@ -266,11 +324,10 @@
 
                 <!-- List group -->
                 <ul class="list-group">
-                    <li class="list-group-item">Cras justo odio</li>
-                    <li class="list-group-item">Dapibus ac facilisis in</li>
-                    <li class="list-group-item">Morbi leo risus</li>
-                    <li class="list-group-item">Porta ac consectetur ac</li>
-                    <li class="list-group-item">Vestibulum at eros</li>
+                    <?php if(is_array($hottestUser)): foreach($hottestUser as $key=>$vo): ?><li class="list-group-item">
+                            <p><img class="media-object" src="/webproject/Public/img/head.png"
+                                    style="height: 50px;width: 50px"><a href="/webproject/index.php/Home/User/info/uid/<?php echo ($vo["uid"]); ?>"><?php echo ($vo["nickname"]); ?></a> 积分:<?php echo ($vo["credit"]); ?></p>
+                        </li><?php endforeach; endif; ?>
                 </ul>
             </div>
         </div>

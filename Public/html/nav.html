@@ -47,3 +47,48 @@
         </nav>
     </div>
 </nav>
+
+
+<div class="modal fade" id="warnBox" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">提示</h4>
+            </div>
+            <div class="modal-body">
+                <p id="warnMessage"></p>
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>积分</th>
+                        <th>每日问题上限</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><20</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>>=20</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>>=50</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>>=100</td>
+                        <td>5</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">确认</button>
+            </div>
+        </div>
+    </div>
+</div>

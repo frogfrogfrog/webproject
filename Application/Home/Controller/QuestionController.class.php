@@ -112,6 +112,45 @@ class QuestionController extends Controller{
         $this->display("PostQuestion");
     }
 
+    public function canPostQuestion(){
+        $uid=I('uid');
+
+        $t = time();
+        $t1 = mktime(0,0,0,date("m",$t),date("d",$t),date("Y",$t));
+        $startTime=date("Y-m-d H:i:s",$t1);
+
+        $e1 = mktime(23,59,59,date("m",$t),date("d",$t),date("Y",$t));
+        $endTime=date("Y-m-d H:i:s",$e1);
+
+        $map['time']  = array('between',array($startTime,$endTime));
+        $map['uid']=$uid;
+        $Question=M('Question');
+        $qidList=$Question->where($map)->getField('qid',true);
+
+        $User=M('User');
+        $credit=$User->where('uid=%d',$uid)->getField('credit');
+
+        $num=sizeof($qidList);
+
+        $ret['num']=$num;
+        $ret['credit']=$credit;
+        $ret['flag']=0;
+
+        if($num>=1 && $credit<20){
+
+        }elseif($num>=2 && $credit<50){
+
+        }elseif($num>=3 && $credit<100){
+
+        }elseif($num>=5){
+
+        }else{
+            $ret['flag']=1;
+        }
+
+        $this->ajaxReturn($ret,"json");
+    }
+
 
     public function ueditor(){
         $data = new \Org\Util\Ueditor();
